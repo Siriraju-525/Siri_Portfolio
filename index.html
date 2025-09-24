@@ -23,14 +23,11 @@
     </ul>
   </nav>
 
-  <!-- HOME SECTION -->
+  <!-- HOME SECTION (no extra image, as you wanted) -->
   <section id="home" class="section visible">
     <div class="hero">
-      <img src="https://images.unsplash.com/photo-1550439062-609e1531270e?fit=crop&w=800&q=80" alt="Laptop with code on screen" class="hero-img">
       <h1 class="gradient-name name-times">Siri Raju Darsinala</h1>
-      <p class="tagline">
-        Transforming ideas into <strong>intelligent</strong>, <strong>elegant</strong>, and <strong>impactful</strong> solutions.
-      </p>
+      <p class="tagline">Transforming ideas into <strong>intelligent</strong>, <strong>elegant</strong>, and <strong>impactful</strong> solutions.</p>
       <div class="icons">
         <a href="mailto:siriraju.darsinala001@gmail.com"><i class="fa-solid fa-envelope"></i></a>
         <a href="https://www.linkedin.com/in/siri-raju-darsinala" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
@@ -78,6 +75,10 @@
   </section>
 
   <!-- PROJECTS SECTION -->
+  <!-- 
+    ONLY YOUR PROJECTS, with a clearly visible, custom workflow illustration for the n8n project.
+    No logs, no laptops, no decorative images—just what matters.
+  -->
   <section id="projects" class="section">
     <h2>Featured Projects</h2>
     <div class="project-horizontal-layout">
@@ -92,7 +93,7 @@
       </div>
 
       <div class="project-card">
-        <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?fit=crop&w=600&q=80" alt="Digit Recognition AI">
+        <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?fit=crop&w=600&q=80" alt="Digit AI">
         <div class="project-info">
           <h3>Digit Recognition AI</h3>
           <p>A deep learning model to recognize handwritten digits with high accuracy.</p>
@@ -111,12 +112,12 @@
         </div>
       </div>
 
+      <!-- Here's your n8n project with a workflow automation illustration (not a logo/computer) -->
       <div class="project-card">
-        <!-- Here is your new n8n project card with a visible, modern illustration -->
-        <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/81edd83a-a8c-4456-94f9-0a61d399cc4f.png" alt="n8n Workflow Automation" style="width:100%; height:200px; object-fit:cover;"/>
+        <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/81edd83a-a8c-4456-94f9-0a61d399cc4f.png" alt="n8n Workflow Automation" style="width:100%; height:200px; object-fit:cover;">
         <div class="project-info">
           <h3>n8n Workflow Automation</h3>
-          <p>Implemented sophisticated workflow automation using n8n—connected APIs, processed data, and triggered actions—to streamline business processes efficiently.</p>
+          <p>Implemented sophisticated workflow automation using n8n to streamline business processes efficiently.</p>
           <p><span class="project-tags">n8n, Automation</span></p>
           <a href="https://github.com/Siriraju-525/n8n-projects" target="_blank">View on GitHub</a>
         </div>
@@ -210,8 +211,8 @@
     // --- NETWORK CANVAS ---
     const netCanvas = document.getElementById('networkCanvas');
     const netCtx = netCanvas.getContext('2d');
-    const networkImg = new Image();
-    networkImg.src = 'https://images.unsplash.com/photo-1550439062-609e1531270e?fit=crop&w=800&q=80';
+    let networkImg = new Image();
+    networkImg.src = 'download.jpg';
     function resizeNetwork() {
       netCanvas.width = window.innerWidth;
       netCanvas.height = window.innerHeight;
