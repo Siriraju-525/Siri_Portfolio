@@ -112,7 +112,7 @@ Transforming ideas into <strong>intelligent</strong>, <strong>elegant</strong>, 
     <a href="https://github.com/Siriraju-525/n8n-projects" target="_blank">View GitHub Repo</a>
   </div>
 </div>
-
+</div>
  <div class="project-card">
       <img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?fit=crop&w=600&q=80" alt="JPMorgan Chase & Co. Quantitative Research Simulation" />
       <div class="project-info">
@@ -122,154 +122,186 @@ Transforming ideas into <strong>intelligent</strong>, <strong>elegant</strong>, 
     <a href="https://github.com/Siriraju-525/jpmorgan-quantitative-research-simulation" target="_blank">View on GitHub</a>
   </div>
 </div>
+    <div class="down-arrow global-arrow"><i class="fa-solid fa-angles-down"></i></div>
+  </section>
 
+  <!-- BLOG SECTION -->
+  <section id="blog" class="section">
+    <h2>Blog</h2>
+    <div class="grid blog-list">
+      <div class="card blog-card" onclick="toggleBlog('blog1')">
+        <h3>The Future is AI in Software</h3>
+        <div class="blog-content" id="blog1">
+          <p>AI is no longer just a buzzword in software development; it's a fundamental tool that enhances every stage of the lifecycle. From AI-powered code completion and automated testing to intelligent bug detection, developers can now build more robust applications faster than ever. For freelancers, this means offering more value to clients by delivering smarter, more efficient solutions. This post explores the practical tools and emerging trends that are shaping the future of software engineering.</p>
+        </div>
+      </div>
+      <div class="card blog-card" onclick="toggleBlog('blog2')">
+        <h3>Building a Data-Driven Portfolio</h3>
+        <div class="blog-content" id="blog2">
+          <p>For aspiring data analysts, a strong portfolio is everything. Instead of just listing skills, showcase projects that solve real problems. Think interactive sales dashboards built with Tableau, machine learning models that predict market trends, or sentiment analysis tools that provide actionable business intelligence. This article breaks down the top projects that will catch a recruiter's eye and demonstrates how to present your findings in a compelling way.</p>
+        </div>
+      </div>
+      <div class="card blog-card" onclick="toggleBlog('blog3')">
+        <h3>Inside the Build: A Trading Bot</h3>
+        <div class="blog-content" id="blog3">
+          <p>Creating an automated trading bot is a masterclass in combining real-time data handling, robust API integration, and sound financial logic. In this deep dive, I share the behind-the-scenes journey of building a bot for the Binance platform. From managing API rate limits and handling market volatility to developing a user-friendly interface for tracking performance, this post covers the technical challenges and business lessons learned along the way.</p>
+        </div>
+      </div>
+    </div>
+    <div class="down-arrow global-arrow"><i class="fa-solid fa-angles-down"></i></div>
+  </section>
 
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="section">
+    <h2>Contact Me</h2>
+    <form onsubmit="showMessage(event)">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div id="message" class="message"></div>
+    <div class="icons" style="margin-top:20px;">
+      <a href="mailto:siriraju.darsinala001@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+      <a href="https://www.linkedin.com/in/siri-raju-darsinala" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://github.com/Siriraju-525" target="_blank"><i class="fa-brands fa-github"></i></a>
+    </div>
+    <div class="down-arrow global-arrow"><i class="fa-solid fa-angles-down"></i></div>
+  </section>
 
-<!-- BLOG SECTION -->
-<section id="blog" class="section">
-<h2>Blog</h2>
-<div class="grid blog-list">
-<div class="card blog-card" onclick="toggleBlog('blog1')">
-<h3>The Future is AI in Software</h3>
-<div class="blog-content" id="blog1">
-<p>Artificial intelligence is rapidly moving from a niche technology to a core component of modern software development. AI-driven tools are now integrated into every phase of the development lifecycle...</p>
-</div>
-</div>
-<div class="card blog-card" onclick="toggleBlog('blog2')">
-<h3>Building a Data-Driven Portfolio</h3>
-<div class="blog-content" id="blog2">
-<p>For data scientists and analysts, a portfolio is more than just a resume—it's a demonstration of your ability to turn raw data into actionable insights...</p>
-</div>
-</div>
-<div class="card blog-card" onclick="toggleBlog('blog3')">
-<h3>Inside the Build: A Trading Bot</h3>
-<div class="blog-content" id="blog3">
-<p>Developing an automated trading bot is a challenging yet rewarding project that combines skills in real-time data processing, robust API integration, and sophisticated financial logic...</p>
-</div>
-</div>
-</div>
-<div class="down-arrow global-arrow"><i class="fa-solid fa-angles-down"></i></div>
-</section>
+  <footer>
+    <p>Thank you for visiting. <b>Open to freelance and job opportunities!</b> Let's build something amazing together.</p>
+    <p>&copy; 2025 Siri Raju Darsinala</p>
+  </footer>
 
-<!-- CONTACT SECTION -->
-<section id="contact" class="section">
-<h2>Contact Me</h2>
-<form onsubmit="showMessage(event)">
-<input type="text" placeholder="Your Name" required />
-<input type="email" placeholder="Your Email" required />
-<textarea placeholder="Your Message" required></textarea>
-<button type="submit">Send Message</button>
-</form>
-<div id="message" class="message"></div>
-<div class="icons" style="margin-top:20px;">
-<a href="mailto:siriraju.darsinala001@gmail.com"><i class="fa-solid fa-envelope"></i></a>
-<a href="https://www.linkedin.com/in/siri-raju-darsinala" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-<a href="https://github.com/Siriraju-525" target="_blank"><i class="fa-brands fa-github"></i></a>
-</div>
-<div class="down-arrow global-arrow"><i class="fa-solid fa-angles-down"></i></div>
-</section>
+  <script>
+    // Section navigation and sliding arrow logic
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('visible'));
+      document.getElementById(id).classList.add('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-<footer>
-<p>Thank you for visiting. <b>Open to freelance and job opportunities!</b> Let's build something amazing together.</p>
-<p>&copy; 2025 Siri Raju Darsinala</p>
-</footer>
+    document.addEventListener('DOMContentLoaded', function () {
+      const sections = [...document.querySelectorAll('.section')];
+      document.querySelectorAll('.global-arrow').forEach(arrow => {
+        arrow.onclick = function () {
+          let currentIdx = sections.findIndex(s => s.classList.contains('visible'));
+          let nextIdx = (currentIdx + 1) % sections.length; // Loop back to home from contact
+          showSection(sections[nextIdx].id);
+        };
+      });
+      // Hide all blog content initially
+      document.querySelectorAll('.blog-content').forEach(el => el.style.display = "none");
+    });
 
-<script>
-// JS for section navigation, blog toggle, message, animations
-function showSection(id) {
-document.querySelectorAll('.section').forEach(sec => sec.classList.remove('visible'));
-document.getElementById(id).classList.add('visible');
-window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+    // Blog expand/collapse logic
+    function toggleBlog(blogId) {
+      const content = document.getElementById(blogId);
+      const isVisible = content.style.display === "block";
+      // Hide all other blogs before showing the new one
+      document.querySelectorAll('.blog-content').forEach(el => {
+        if (el.id !== blogId) {
+          el.style.display = "none";
+        }
+      });
+      // Toggle the clicked blog
+      content.style.display = isVisible ? "none" : "block";
+    }
 
-document.addEventListener('DOMContentLoaded', function () {
-const sections = [...document.querySelectorAll('.section')];
-document.querySelectorAll('.global-arrow').forEach(arrow => {
-arrow.onclick = function () {
-let currentIdx = sections.findIndex(s => s.classList.contains('visible'));
-let nextIdx = (currentIdx + 1) % sections.length;
-showSection(sections[nextIdx].id);
-};
-});
-document.querySelectorAll('.blog-content').forEach(el => el.style.display = "none");
-});
+    // Form submission message
+    function showMessage(e) {
+      e.preventDefault();
+      const msg = document.getElementById('message');
+      msg.innerText = 'Message sent! Thank you for reaching out.';
+    }
 
-function toggleBlog(blogId) {
-const content = document.getElementById(blogId);
-const isVisible = content.style.display === "block";
-document.querySelectorAll('.blog-content').forEach(el => {
-if (el.id !== blogId) el.style.display = "none";
-});
-content.style.display = isVisible ? "none" : "block";
-}
+    // --- Animated Backgrounds ---
+    const netCanvas = document.getElementById('networkCanvas');
+    const netCtx = netCanvas.getContext('2d');
+    let networkImg = new Image();
+    // Use the blue network image you provided
+    networkImg.src = 'download.jpg';
 
-function showMessage(e) {
-e.preventDefault();
-document.getElementById('message').innerText = 'Message sent! Thank you for reaching out.';
-}
+    function resizeNetwork() {
+      netCanvas.width = window.innerWidth;
+      netCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeNetwork);
+    resizeNetwork();
 
-// Network and sparkle canvas animations
-const netCanvas = document.getElementById('networkCanvas');
-const netCtx = netCanvas.getContext('2d');
-let networkImg = new Image();
-networkImg.src = 'download.jpg';
-function resizeNetwork() { netCanvas.width = window.innerWidth; netCanvas.height = window.innerHeight; }
-window.addEventListener('resize', resizeNetwork);
-resizeNetwork();
-let offset = 0;
-function animateNetworkBg() {
-offset += 0.03;
-netCtx.clearRect(0, 0, netCanvas.width, netCanvas.height);
-const scale = 1.1;
-const scaledWidth = networkImg.width * scale;
-const scaledHeight = networkImg.height * scale;
-const dx = Math.sin(offset * 0.5) * 20 - (scaledWidth - netCanvas.width) / 2;
-const dy = Math.cos(offset * 0.3) * 20 - (scaledHeight - netCanvas.height) / 2;
-netCtx.globalAlpha = 0.7;
-netCtx.drawImage(networkImg, dx, dy, scaledWidth, scaledHeight);
-netCtx.globalAlpha = 1.0;
-requestAnimationFrame(animateNetworkBg);
-}
-networkImg.onload = animateNetworkBg;
+    let offset = 0;
+    function animateNetworkBg() {
+      offset += 0.03;
+      netCtx.clearRect(0, 0, netCanvas.width, netCanvas.height);
+      const scale = 1.1; // Slight zoom for a more dynamic feel
+      const scaledWidth = networkImg.width * scale;
+      const scaledHeight = networkImg.height * scale;
+      const dx = Math.sin(offset * 0.5) * 20 - (scaledWidth - netCanvas.width) / 2;
+      const dy = Math.cos(offset * 0.3) * 20 - (scaledHeight - netCanvas.height) / 2;
 
-const sparkleCanvas = document.getElementById('sparkleCanvas');
-const sparkleCtx = sparkleCanvas.getContext('2d');
-function resizeSparkle() { sparkleCanvas.width = window.innerWidth; sparkleCanvas.height = window.innerHeight; }
-window.addEventListener('resize', resizeSparkle);
-resizeSparkle();
-const sparkleLines = Array.from({ length: 20 }, () => ({ x: Math.random() * sparkleCanvas.width, y: Math.random() * sparkleCanvas.height, angle: Math.random() * Math.PI * 2, length: 70 + Math.random() * 80, alpha: 0.1 + Math.random() * 0.2 }));
-function animateSparkleLines() {
-sparkleCtx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
-sparkleLines.forEach(line => {
-line.x += Math.cos(line.angle) * 0.3;
-line.y += Math.sin(line.angle) * 0.3;
-line.angle += (Math.random() - 0.5) * 0.01;
-if (line.x < -line.length) line.x = sparkleCanvas.width + line.length;
-if (line.x > sparkleCanvas.width + line.length) line.x = -line.length;
-if (line.y < -line.length) line.y = sparkleCanvas.height + line.length;
-if (line.y > sparkleCanvas.height + line.length) line.y = -line.length;
-const x2 = line.x + Math.cos(line.angle) * line.length;
-const y2 = line.y + Math.sin(line.angle) * line.length;
-sparkleCtx.save();
-sparkleCtx.beginPath();
-sparkleCtx.moveTo(line.x, line.y);
-sparkleCtx.lineTo(x2, y2);
-const grad = sparkleCtx.createLinearGradient(line.x, line.y, x2, y2);
-grad.addColorStop(0, "#FFD700");
-grad.addColorStop(0.5, "#fffbe7");
-grad.addColorStop(1, "#FFD700");
-sparkleCtx.strokeStyle = grad;
-sparkleCtx.globalAlpha = line.alpha;
-sparkleCtx.lineWidth = 1.5 + Math.random();
-sparkleCtx.shadowBlur = 8;
-sparkleCtx.shadowColor = "#FFD700";
-sparkleCtx.stroke();
-sparkleCtx.restore();
-});
-requestAnimationFrame(animateSparkleLines);
-}
-animateSparkleLines();
-</script>
+      netCtx.globalAlpha = 0.7; // Make the background slightly transparent
+      netCtx.drawImage(networkImg, dx, dy, scaledWidth, scaledHeight);
+      netCtx.globalAlpha = 1.0;
+      requestAnimationFrame(animateNetworkBg);
+    }
+    networkImg.onload = animateNetworkBg;
 
+    const sparkleCanvas = document.getElementById('sparkleCanvas');
+    const sparkleCtx = sparkleCanvas.getContext('2d');
+
+    function resizeSparkle() {
+      sparkleCanvas.width = window.innerWidth;
+      sparkleCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeSparkle);
+    resizeSparkle();
+
+    const sparkleLines = Array.from({ length: 20 }, () => ({
+      x: Math.random() * sparkleCanvas.width,
+      y: Math.random() * sparkleCanvas.height,
+      angle: Math.random() * Math.PI * 2,
+      length: 70 + Math.random() * 80,
+      alpha: 0.1 + Math.random() * 0.2
+    }));
+
+    function animateSparkleLines() {
+      sparkleCtx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
+      sparkleLines.forEach(line => {
+        line.x += Math.cos(line.angle) * 0.3;
+        line.y += Math.sin(line.angle) * 0.3;
+        line.angle += (Math.random() - 0.5) * 0.01;
+
+        if (line.x < -line.length) line.x = sparkleCanvas.width + line.length;
+        if (line.x > sparkleCanvas.width + line.length) line.x = -line.length;
+        if (line.y < -line.length) line.y = sparkleCanvas.height + line.length;
+        if (line.y > sparkleCanvas.height + line.length) line.y = -line.length;
+
+        const x2 = line.x + Math.cos(line.angle) * line.length;
+        const y2 = line.y + Math.sin(line.angle) * line.length;
+
+        sparkleCtx.save();
+        sparkleCtx.beginPath();
+        sparkleCtx.moveTo(line.x, line.y);
+        sparkleCtx.lineTo(x2, y2);
+        const grad = sparkleCtx.createLinearGradient(line.x, line.y, x2, y2);
+        grad.addColorStop(0, "#FFD700");
+        grad.addColorStop(0.5, "#fffbe7");
+        grad.addColorStop(1, "#FFD700");
+        sparkleCtx.strokeStyle = grad;
+        sparkleCtx.globalAlpha = line.alpha;
+        sparkleCtx.lineWidth = 1.5 + Math.random();
+        sparkleCtx.shadowBlur = 8;
+        sparkleCtx.shadowColor = "#FFD700";
+        sparkleCtx.stroke();
+        sparkleCtx.restore();
+      });
+      requestAnimationFrame(animateSparkleLines);
+    }
+    animateSparkleLines();
+  </script>
 </body>
 </html>
+
+
+
