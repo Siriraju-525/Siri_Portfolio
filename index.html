@@ -24,6 +24,8 @@
 </ul>
 </nav>
 
+<button id="effectsToggle" class="effects-toggle" aria-pressed="true" title="Toggle background effects">Effects: On</button>
+
 <!-- HOME SECTION -->
 <section id="home" class="section visible">
 <div class="hero">
@@ -216,89 +218,214 @@ Transforming ideas into <strong>intelligent</strong>, <strong>elegant</strong>, 
       msg.innerText = 'Message sent! Thank you for reaching out.';
     }
 
-    // --- Animated Backgrounds ---
+    // --- Animated Backgrounds (enhanced, unified, DPR-aware) ---
     const netCanvas = document.getElementById('networkCanvas');
     const netCtx = netCanvas.getContext('2d');
-    let networkImg = new Image();
-    // Use the blue network image you provided
-    networkImg.src = 'download.jpg';
-
-    function resizeNetwork() {
-      netCanvas.width = window.innerWidth;
-      netCanvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeNetwork);
-    resizeNetwork();
-
-    let offset = 0;
-    function animateNetworkBg() {
-      offset += 0.03;
-      netCtx.clearRect(0, 0, netCanvas.width, netCanvas.height);
-      const scale = 1.1; // Slight zoom for a more dynamic feel
-      const scaledWidth = networkImg.width * scale;
-      const scaledHeight = networkImg.height * scale;
-      const dx = Math.sin(offset * 0.5) * 20 - (scaledWidth - netCanvas.width) / 2;
-      const dy = Math.cos(offset * 0.3) * 20 - (scaledHeight - netCanvas.height) / 2;
-
-      netCtx.globalAlpha = 0.7; // Make the background slightly transparent
-      netCtx.drawImage(networkImg, dx, dy, scaledWidth, scaledHeight);
-      netCtx.globalAlpha = 1.0;
-      requestAnimationFrame(animateNetworkBg);
-    }
-    networkImg.onload = animateNetworkBg;
-
     const sparkleCanvas = document.getElementById('sparkleCanvas');
     const sparkleCtx = sparkleCanvas.getContext('2d');
+    const effectsToggleEl = document.getElementById('effectsToggle');
 
-    function resizeSparkle() {
-      sparkleCanvas.width = window.innerWidth;
-      sparkleCanvas.height = window.innerHeight;
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    function setCanvasSize(canvas, ctx) {
+      const cssWidth = window.innerWidth;
+      const cssHeight = window.innerHeight;
+      canvas.style.width = cssWidth + 'px';
+      canvas.style.height = cssHeight + 'px';
+      canvas.width = Math.floor(cssWidth * dpr);
+      canvas.height = Math.floor(cssHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
-    window.addEventListener('resize', resizeSparkle);
-    resizeSparkle();
 
-    const sparkleLines = Array.from({ length: 20 }, () => ({
-      x: Math.random() * sparkleCanvas.width,
-      y: Math.random() * sparkleCanvas.height,
-      angle: Math.random() * Math.PI * 2,
-      length: 70 + Math.random() * 80,
-      alpha: 0.1 + Math.random() * 0.2
-    }));
+    function canvasCssWidth(canvas) { return canvas.width / dpr; }
+    function canvasCssHeight(canvas) { return canvas.height / dpr; }
 
-    function animateSparkleLines() {
-      sparkleCtx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
+    // Background image with graceful fallback
+    const networkImg = new Image();
+    let networkImageLoaded = false;
+    let useGradientFallback = false;
+    networkImg.src = 'download.jpg';
+    networkImg.onload = () => { networkImageLoaded = true; };
+    networkImg.onerror = () => { useGradientFallback = true; };
+
+    // Sparkle lines
+    let sparkleLines = [];
+    function targetSparkleCount() {
+      const width = window.innerWidth;
+      if (width < 480) return 10;
+      if (width < 768) return 14;
+      return 22;
+    }
+    function reinitializeSparklesIfNeeded(force = false) {
+      const desired = targetSparkleCount();
+      if (force || Math.abs(desired - sparkleLines.length) > 2) {
+        const w = canvasCssWidth(sparkleCanvas);
+        const h = canvasCssHeight(sparkleCanvas);
+        sparkleLines = Array.from({ length: desired }, () => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          angle: Math.random() * Math.PI * 2,
+          length: 60 + Math.random() * 70,
+          alpha: 0.12 + Math.random() * 0.18
+        }));
+      }
+    }
+
+    // Resize handling with DPR awareness
+    function resizeAll() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      setCanvasSize(netCanvas, netCtx);
+      setCanvasSize(sparkleCanvas, sparkleCtx);
+      reinitializeSparklesIfNeeded(true);
+      if (!animationEnabled) {
+        drawStaticBackground();
+      }
+    }
+    window.addEventListener('resize', resizeAll);
+    resizeAll();
+
+    let offset = 0;
+    function drawNetworkBackground() {
+      const w = canvasCssWidth(netCanvas);
+      const h = canvasCssHeight(netCanvas);
+      netCtx.clearRect(0, 0, w, h);
+
+      if (networkImageLoaded && !useGradientFallback) {
+        offset += 0.03;
+        const imgWcss = networkImg.width / dpr;
+        const imgHcss = networkImg.height / dpr;
+        const coverScale = Math.max(w / imgWcss, h / imgHcss) * 1.1;
+        const drawW = imgWcss * coverScale;
+        const drawH = imgHcss * coverScale;
+        const dx = Math.sin(offset * 0.5) * 20 - (drawW - w) / 2;
+        const dy = Math.cos(offset * 0.3) * 20 - (drawH - h) / 2;
+        netCtx.globalAlpha = 0.7;
+        netCtx.drawImage(networkImg, dx, dy, drawW, drawH);
+        netCtx.globalAlpha = 1.0;
+      } else {
+        const grad = netCtx.createLinearGradient(0, 0, w, h);
+        grad.addColorStop(0, '#0A192F');
+        grad.addColorStop(1, '#112240');
+        netCtx.fillStyle = grad;
+        netCtx.fillRect(0, 0, w, h);
+      }
+    }
+
+    function drawSparkles() {
+      const w = canvasCssWidth(sparkleCanvas);
+      const h = canvasCssHeight(sparkleCanvas);
+      sparkleCtx.clearRect(0, 0, w, h);
       sparkleLines.forEach(line => {
-        line.x += Math.cos(line.angle) * 0.3;
-        line.y += Math.sin(line.angle) * 0.3;
+        const speed = 0.3;
+        line.x += Math.cos(line.angle) * speed;
+        line.y += Math.sin(line.angle) * speed;
         line.angle += (Math.random() - 0.5) * 0.01;
-
-        if (line.x < -line.length) line.x = sparkleCanvas.width + line.length;
-        if (line.x > sparkleCanvas.width + line.length) line.x = -line.length;
-        if (line.y < -line.length) line.y = sparkleCanvas.height + line.length;
-        if (line.y > sparkleCanvas.height + line.length) line.y = -line.length;
-
+        if (line.x < -line.length) line.x = w + line.length;
+        if (line.x > w + line.length) line.x = -line.length;
+        if (line.y < -line.length) line.y = h + line.length;
+        if (line.y > h + line.length) line.y = -line.length;
         const x2 = line.x + Math.cos(line.angle) * line.length;
         const y2 = line.y + Math.sin(line.angle) * line.length;
-
         sparkleCtx.save();
         sparkleCtx.beginPath();
         sparkleCtx.moveTo(line.x, line.y);
         sparkleCtx.lineTo(x2, y2);
         const grad = sparkleCtx.createLinearGradient(line.x, line.y, x2, y2);
-        grad.addColorStop(0, "#FFD700");
-        grad.addColorStop(0.5, "#fffbe7");
-        grad.addColorStop(1, "#FFD700");
+        grad.addColorStop(0, '#FFD700');
+        grad.addColorStop(0.5, '#fffbe7');
+        grad.addColorStop(1, '#FFD700');
         sparkleCtx.strokeStyle = grad;
         sparkleCtx.globalAlpha = line.alpha;
         sparkleCtx.lineWidth = 1.5 + Math.random();
         sparkleCtx.shadowBlur = 8;
-        sparkleCtx.shadowColor = "#FFD700";
+        sparkleCtx.shadowColor = '#FFD700';
         sparkleCtx.stroke();
         sparkleCtx.restore();
       });
-      requestAnimationFrame(animateSparkleLines);
     }
-    animateSparkleLines();
+
+    function drawStaticBackground() {
+      const w = canvasCssWidth(netCanvas);
+      const h = canvasCssHeight(netCanvas);
+      netCtx.clearRect(0, 0, w, h);
+      if (networkImageLoaded && !useGradientFallback) {
+        const imgWcss = networkImg.width / dpr;
+        const imgHcss = networkImg.height / dpr;
+        const coverScale = Math.max(w / imgWcss, h / imgHcss) * 1.1;
+        const drawW = imgWcss * coverScale;
+        const drawH = imgHcss * coverScale;
+        const dx = -(drawW - w) / 2;
+        const dy = -(drawH - h) / 2;
+        netCtx.globalAlpha = 0.7;
+        netCtx.drawImage(networkImg, dx, dy, drawW, drawH);
+        netCtx.globalAlpha = 1.0;
+      } else {
+        const grad = netCtx.createLinearGradient(0, 0, w, h);
+        grad.addColorStop(0, '#0A192F');
+        grad.addColorStop(1, '#112240');
+        netCtx.fillStyle = grad;
+        netCtx.fillRect(0, 0, w, h);
+      }
+      sparkleCtx.clearRect(0, 0, canvasCssWidth(sparkleCanvas), canvasCssHeight(sparkleCanvas));
+    }
+
+    // Animation control and reduced motion
+    let animationEnabled = true;
+    let animationStarted = false;
+    let rafId = 0;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (prefersReducedMotion.matches) {
+      animationEnabled = false;
+    }
+    prefersReducedMotion.addEventListener('change', () => {
+      animationEnabled = !prefersReducedMotion.matches;
+      setToggleFromState();
+      if (animationEnabled) {
+        startAnimation();
+      } else {
+        stopAnimation();
+        drawStaticBackground();
+      }
+    });
+
+    function setToggleFromState() {
+      effectsToggleEl.setAttribute('aria-pressed', animationEnabled ? 'true' : 'false');
+      effectsToggleEl.textContent = animationEnabled ? 'Effects: On' : 'Effects: Off';
+    }
+    effectsToggleEl.addEventListener('click', () => {
+      animationEnabled = !animationEnabled;
+      setToggleFromState();
+      if (animationEnabled) {
+        startAnimation();
+      } else {
+        stopAnimation();
+        drawStaticBackground();
+      }
+    });
+
+    function animate() {
+      if (!animationEnabled) return;
+      drawNetworkBackground();
+      drawSparkles();
+      rafId = requestAnimationFrame(animate);
+    }
+    function startAnimation() {
+      if (animationStarted) return;
+      animationStarted = true;
+      rafId = requestAnimationFrame(animate);
+    }
+    function stopAnimation() {
+      animationStarted = false;
+      if (rafId) cancelAnimationFrame(rafId);
+    }
+
+    // Initialize
+    setToggleFromState();
+    if (animationEnabled) {
+      startAnimation();
+    } else {
+      drawStaticBackground();
+    }
   </script>
 </body>
 </html>
