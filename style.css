@@ -26,6 +26,27 @@ body {
   z-index: 2;
 }
 
+/* Effects toggle button */
+.effects-toggle {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 110;
+  background: #112240;
+  color: #50C878;
+  border: 1px solid #233554;
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+.effects-toggle:hover {
+  background-color: #172a45;
+  color: #FFD700;
+  transform: translateY(-2px);
+}
+
 .navbar {
   position: sticky;
   top: 0;
